@@ -46,11 +46,11 @@ fs.readFile("readMe.txt", "utf8", function(err, data){
  * This is good and youre creatting custom emitters properly however I would have like to see these 
  * events get emitted when those actions are actually taking place. 
  */
-const EventEmitter = require("events");
-const emitter = new EventEmitter();
+const events = require("events");
+const myEmitter = new events.EventEmitter();
 
-emitter.on("fileCreated", function(){
-    console.log("file has been created");
+myEmitter.on("fileCreated", (msg)=> {
+    console.log(msg);
 });
 
 /**
@@ -58,15 +58,15 @@ emitter.on("fileCreated", function(){
  * they are fine to use and I encourage you to use whichever is more comfortable however the new ES6
  * syntax is now more widely used. 
  */
-emitter.on("fileWrittenTo", function(){
-    console.log("file has been written to");
+myEmitter.on("fileWrittenTo", (msg)=> {
+    console.log(msg);
 });
 
 
-emitter.on("fileRead", function(){
-    console.log("file has been read");
+myEmitter.on("fileRead", (msg)=> {
+    console.log(msg);
 });
 
-emitter.emit("fileCreated");
-emitter.emit("fileWrittenTo");
-emitter.emit("fileRead");
+myEmitter.emit("fileCreated", "file has been created");
+myEmitter.emit("fileWrittenTo", "file has been written to");
+myEmitter.emit("fileRead", "file has been read");
